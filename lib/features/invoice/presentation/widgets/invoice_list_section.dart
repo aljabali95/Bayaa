@@ -123,7 +123,8 @@ class InvoiceListSection extends StatelessWidget {
             sale: sales[i],
             onOpen: () => onOpenInvoice(sales[i]),
             onDelete: isManager ? () => onDeleteSale(sales[i]) : null,
-            onReturn: (isManager && !sales[i].isRefund) ? () => onReturnSale(sales[i]) : null,
+            onReturn:
+                (!sales[i].isRefund) ? () => onReturnSale(sales[i]) : null,
             onPrint: () => onPrintInvoice(sales[i]),
             isManager: isManager,
           ),

@@ -2,17 +2,21 @@ import 'package:crazy_phone_pos/features/auth/data/models/user_model.dart';
 
 class PermissionDeniedException implements Exception {
   final String message;
-  PermissionDeniedException([this.message = "تم رفض الوصول: ليس لديك صلاحية لتنفيذ هذا الإجراء."]);
-  
+  PermissionDeniedException(
+      [this.message = "تم رفض الوصول: ليس لديك صلاحية لتنفيذ هذا الإجراء."]);
+
   @override
   String toString() => message;
 }
 
 class PermissionGuard {
+  /// Refund permission — both managers and cashiers can process refunds.
   static void checkRefundPermission(User user) {
-    if (user.userType == UserType.cashier) {
-      throw PermissionDeniedException("لا يمكن للكاشير تنفيذ عمليات المرتجع على الفواتير.");
-    }
+    // Cashiers are now allowed to process partial refunds.
+    //     if (user.userType == UserType.cashier) {
+    //   throw PermissionDeniedException("لا يمكن للكاشير تنفيذ عمليات المرتجع على الفواتير.");
+    // }
+    return;
   }
 
   static void checkReportAccess(User user) {
@@ -21,8 +25,6 @@ class PermissionGuard {
   }
 
   static void checkDayClosePermission(User user) {
-
-    
     return;
   }
 }
