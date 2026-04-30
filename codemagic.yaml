@@ -2,12 +2,11 @@ workflows:
   build:
     name: Build APK
     environment:
-      # استخدام إصدار أقدم وأكثر توافقًا مع المشاريع القديمة
-      flutter: 3.13.9
+      flutter: 3.19.6
     scripts:
       - flutter clean
+      - sed -i 's/sdk: ">=3.6.1 <4.0.0"/sdk: ">=3.0.0 <4.0.0"/g' pubspec.yaml
       - flutter pub get
-      # --android-skip-build-dependency-validation: هذا الأمر يتجاوز فحوصات التوافق
       - flutter build apk --release --android-skip-build-dependency-validation
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
